@@ -38,4 +38,115 @@ In Order.java, change the type of product from String to Good.
 private Good product;
 ```
 
+Note: This will cause a compiler error on the getter and setter for product, as well as
+the Order’s constructor.
 
+1.2 Update the getter/setter for product. Modify the getter and setter method
+for product in the Order class to get and set a Good, rather than a String.
+The code for the new getter method is shown below.
+
+```java
+public Good getProduct() {
+ return product;
+}
+```
+
+1.3 Update the Order constructor to create a new order with a Good object,
+instead of a String.
+
+```java
+public Order(MyDate d, double amt, String c, Good p, int q) {
+ orderDate = d;
+ orderAmount = amt;
+ customer = c;
+ product = p;
+ quantity = q;
+}
+```
+
+Note: This will cause compile errors in TestOrders.
+
+1.4 Update TestOrders.java to create and use an instance of a Good for the
+product field of an Order, rather than a String. Replace the first few lines of
+the main( ) method shown below…
+
+```java
+MyDate date1 = new MyDate(1, 20, 2008);
+Order anvil = new Order(date1, 2000.00, "Wile E Coyote",
+"Anvil", 10);
+MyDate date2 = new MyDate(4, 10, 2008);
+Order balloons = new Order(date2, 1000.00, "Bugs Bunny",
+"Balloon", 125);
+```
+
+…with what is shown here.
+
+```java
+MyDate date1 = new MyDate(1, 20, 2008);
+Solid s1 = new Solid("Acme Anvil", 1668, 0.3,
+ UnitOfMeasureType.CUBIC_METER, false, 500, 0.25, 0.3);
+Order anvil = new Order(date1, 2000.00, "Wile E Coyote", s1,
+10);
+MyDate date2 = new MyDate(4, 10, 2008);
+Solid s2 = new Solid("Acme Balloon", 1401, 15,
+ UnitOfMeasureType.CUBIC_FEET, false, 10, 5, 5);
+Order balloons = new Order(date2, 1000.00, "Bugs Bunny", s2,
+125);
+// ... rest of the main method as before
+```
+
+Note: This is polymorphism at work. Notice how on Order the type specified was a
+Good. Here you create a Solid for use in the product field! You could have also
+created a Liquid object and passed it in as the product for the order. Polymorphism
+allows any specific object (Solid or Liquid) to be used in a general reference (Good in
+this case).
+
+1.5 You now need to import UnitOfMeasureType and Solid in TestOrders.java.
+
+1.6 Test the new Order class with associated Good products by running
+TestOrders. The output should change a little. Why does it? How does the
+display of product information differ, and what is occurring to make this
+happen?
+
+## Step 2: Implement Equals on MyDate
+
+Given two MyDate objects, do they represent the same date? In other words, are
+they equal? Given the current MyDate definition, you might be surprised by the
+result. In this step, you observe the default implementation of the equals( ) method
+and then override the java.lang.Object equals( ) method to provide a more
+appropriate response among MyDate objects.
+
+2.1 Test if two MyDate are equal. 
+
+2.1.1 Open TestMyDate in an editor view. In the main( ) method of the
+TestMyDate class, create two MyDate objects that have the same day, month, and
+year field values.
+
+```java
+MyDate newYear = new MyDate(1,1,2009);
+MyDate fiscalStart = new MyDate(1,1,2009);
+```
+
+2.1.2 Following the creation of these objects, use the equals( ) method to
+determine whether the two are equal.
+
+```java
+if (newYear.equals(fiscalStart))
+ System.out.println("These two dates are equal");
+else
+ System.out.println("These two dates are not equal");
+```
+
+2.1.3 Save TestMyDate and run the TestMyDate.java file. The results for this
+operation should indicate the two objects are not equal! What does this tell you
+about the equals( ) method?
+
+```java
+These two dates are not equal
+```
+
+2.2 Add an equals( ) method to MyDate.
+
+2.2.1 In the com.acme.utils package, find and open MyDate.java in an editor view.
+
+<img src="./src/main/resources/selectMyDate.png" width="400px">
