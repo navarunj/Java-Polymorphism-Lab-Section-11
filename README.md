@@ -150,3 +150,31 @@ These two dates are not equal
 2.2.1 In the com.acme.utils package, find and open MyDate.java in an editor view.
 
 <img src="./src/main/resources/selectMyDate.png" width="400px">
+
+Add a new equals( ) method that overrides the java.lang.Object equals( ) method.
+
+```java
+public boolean equals(Object o) {
+ if (o instanceof MyDate) {
+ MyDate d = (MyDate) o;
+ if ((d.day == day) && (d.month == month) && (d.year ==
+year)) {
+ return true;
+ }
+ }
+ return false;
+}
+```
+
+Note: Did you see the use of the instanceof operator in this method? Why should you
+use this operator in the equal method?
+
+2.2.2 Save the MyDate.java file, and rerun the TestMyDate.java file. Now the two
+dates should be equal.
+
+```java
+These two dates are equal
+```
+
+Try creating two MyDate objects that do not have the same day, month, and
+year field values, and then check to see if they are equal.
