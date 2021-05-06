@@ -30,8 +30,12 @@ Good type objects to orders.
 on the Order.java file in the com.acme.domain package to open the file in a
 Java editor.
 
+<img src="./src/main/resources/selectOrder.png" width="400px">
+
 In Order.java, change the type of product from String to Good.
 
 ```java
 private Good product;
 ```
+
+
